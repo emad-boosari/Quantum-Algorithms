@@ -1,62 +1,9 @@
-\documentclass[a4paper]{article}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{braket}
-\usepackage{graphicx}
-\usepackage{listings}
-\usepackage{colortbl}
-\usepackage{bm}
-
-%\usepackage{quantikz}
-\usepackage{tikz}
-\usetikzlibrary{quantikz}
-\usepackage{circuitikz}
-\usepackage{tikz}
-\usetikzlibrary{circuits.logic.US}
-%%%%%%%%%%%%%% these two packages are for colored box %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{xcolor}
-\usepackage{mdframed}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{multirow} % for plotting multirow
-\usepackage{adjustbox} % For adjustbox environment
-
-
-\usepackage{geometry}
-
-% Set custom margins
-\geometry{left=2cm, right=2cm}
-\newcommand{\verticaltext}[1]{\rotatebox[origin=c]{90}{#1}}
-
-
-\title{Iterative Quantum Square Root Algorithm}
-\author{Emad Rezaei Fard Boosari, Magdalena Stobinska}
-\date{\today}
-
-\begin{document}
-\maketitle
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Introduction}
-
-
-
-\begin{center}
-    \begin{quantikz}
-\lstick{$\ket{ctrl=1}$} &\qwbundle{1}    &\qw &\gate[5]{U_{\sqrt{\quad}}} &\qw          &      \\            
-\lstick{$\ket{x}$}      &\qwbundle{2m}   &\qw &                           &\qw          &      \\            
-\lstick{$\ket{y}$}      &\qwbundle{2}    &\qw &                           &\qw          &      \\
-\lstick{$\ket{C_{in}}$} &\qwbundle{m}    &\qw &                           &\qw          &      \\                        
-\lstick{$\ket{0}$}      &\qwbundle{4m-2} &\qw &                           &\qwbundle{m} &\rstick{$\ket{q}_m$}
-    \end{quantikz}        
-\end{center}
-
-\end{document}
-
-
-
-
-
-
-
+# Simon’s Problem
+The final example of simple quantum algorithms is Simon’s algorithm. Let us consider a function (oracle) $f : \{0, 1\}^n \rightarrow \{0, 1\}^n$ such that
+\begin{enumerate}
+    \item $f$ is 2 to 1; namely, for any $x_1$, there is one and only one $x_2 = x_1$ such that $f(x_1) = f(x_2)$.
+    \item $f$ is \textbf{\textit{periodic}}; namely, there exists $p \in {0, 1}^n$ such that $f(x \oplus p) = f(x)$, $\forall x \in {0, 1}^n$, where $\oplus$ is a bitwise addition mod 2.
+    The function $f$ is made of $n$ component functions $f_k : \{0, 1\}^n \rightarrow \{0, 1\} as f = (f_1, f_2, . . . , f_n)$
+\end{enumerate}
+Suppose we want to find the period $p$, given an unknown oracle $f$. Since $p$ can be any number between $00\cdots 0$ and $11\cdots 1$, we have to try $\sim$ $2^n$ possibilities classically before we hit the right number. It is shown below that the number of trials required to find $p$ is reduced to $O(n)$ if Simon’s algorithm is employed.
+The algorithm is decomposed into the following steps:
