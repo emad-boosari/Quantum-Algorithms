@@ -7,7 +7,7 @@ Before beginning with more complex and "useful" quantum algorithms, it is benefi
 
 ### Phase Kickback
 
-Before delving into quantum algorithms, it's essential to understand the "phase kickback" phenomenon, a crucial concept in many quantum algorithms. Consider the unitary operator $U_{f}$ defined as follows:
+Before delving into quantum algorithms, it's essential to understand the "_phase kickback_" phenomenon, a crucial concept in many quantum algorithms. Consider the unitary operator $U_{f}$ defined as follows:
 
 $$ U_f|x\rangle|y\rangle = |x\rangle|y \oplus f(x)\rangle $$
 
@@ -31,31 +31,6 @@ $$U_f|x\rangle|-\rangle = (-1)^{f(x)}|x\rangle|-\rangle $$
 
 The general form can be represented as:
 $$ U_f: \big(a|0\rangle + b |1\rangle\big)|-\rangle  \longrightarrow \big(a|0\rangle - b |1\rangle\big)|-\rangle $$
-
-Before starting to express our quantum algorithms, it is better to introduce the "_phase kickedback_" trick which is a well-known effect in many quantum algorithms. To make this effect clear, let me suppose the following unitary operator $U_{f}$.
-
-$$U_f|x\rangle|y\rangle=|x\rangle|y \oplus	f(x)\rangle$$
-
-$$U_f \bigg(\frac{|0\rangle+|1\rangle}{\sqrt{2}} \bigg)|0\rangle=\bigg(\frac{|0\rangle|0 \oplus f(0)\rangle+|1\rangle|0 \oplus f(1)\rangle}{\sqrt{2}} \bigg)=\frac{1}{\sqrt{2}}(|0\rangle|f(0)\rangle+|1\rangle|f(1)\rangle)$$.
-
-$$\begin{eqnarray}
-U_f|x\rangle|-\rangle &=& U_f |x\rangle\dfrac{\big(|0\rangle - |1\rangle\big)}{\sqrt{2}} =  |x\rangle\dfrac{\big(|f(x)\rangle - |1+f(x)\rangle\big)}{\sqrt{2}}
-\end{eqnarray}
-$$
- - for $f(x)=0 \longmapsto U_f|x\rangle|-\rangle =  |x\rangle\dfrac{\big(|0\rangle - |1\rangle\big)}{\sqrt{2}}=|x\rangle|-\rangle$
- - for $f(x)=1 \longmapsto U_f|x\rangle|-\rangle =  |x\rangle\dfrac{\big(|1\rangle - |0\rangle\big)}{\sqrt{2}}=- |x\rangle|-\rangle$
-
-We can summarize above equations in the following rules
- $$U_f|x\rangle|-\rangle =  (-1)^{f(x)}|x\rangle|-\rangle$$
-
-
-
-
-## Conclusion
-The general form can be represented as follows
-
-$$ U_f: \big(a|0\rangle + b |1\rangle\big)|-\rangle  \longmapsto \big(a|0\rangle - b |1\rangle\big)|-\rangle$$
-
 
 
 ## Deutsch Algorithm
