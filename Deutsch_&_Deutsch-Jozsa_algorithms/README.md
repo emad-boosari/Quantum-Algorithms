@@ -16,12 +16,13 @@ $$ U_f \left(\frac{|0\rangle+|1\rangle}{\sqrt{2}} \right)|0\rangle = \frac{1}{\s
 $$ U_f|x\rangle|-\rangle = U_f |x\rangle\frac{\big(|0\rangle - |1\rangle\big)}{\sqrt{2}} = |x\rangle\frac{\big(|f(x)\rangle - |1+f(x)\rangle\big)}{\sqrt{2}}
 $$
 
-- For $f(x)=0$
+1. For $f(x)=0$
   $$U_f|x\rangle|-\rangle = |x\rangle\frac{\big(|0\rangle - |1\rangle\big)}{\sqrt{2}}=|x\rangle|-\rangle$$
-- For $f(x)=1$
+2. For $f(x)=1$
   $$U_f|x\rangle|-\rangle = |x\rangle\frac{\big(|1\rangle - |0\rangle\big)}{\sqrt{2}}=- |x\rangle|-\rangle $$
 
 These equations can be summarized as follows:
+
 $$U_f|x\rangle|-\rangle = (-1)^{f(x)}|x\rangle|-\rangle $$
 
 ### Conclusion
