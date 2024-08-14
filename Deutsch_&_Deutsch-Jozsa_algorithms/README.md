@@ -9,32 +9,23 @@ Before beginning with more complex and "useful" quantum algorithms, it is benefi
 
 Before delving into quantum algorithms, it's essential to understand the "phase kickback" phenomenon, a crucial concept in many quantum algorithms. Consider the unitary operator \( U_{f} \) defined as follows:
 
-\[
-U_f|x\rangle|y\rangle = |x\rangle|y \oplus f(x)\rangle
-\]
-\[
-U_f \left(\frac{|0\rangle+|1\rangle}{\sqrt{2}} \right)|0\rangle = \frac{1}{\sqrt{2}}(|0\rangle|f(0)\rangle+|1\rangle|f(1)\rangle)
-\]
+$$ U_f|x\rangle|y\rangle = |x\rangle|y \oplus f(x)\rangle $$
 
-\[
-U_f|x\rangle|-\rangle = U_f |x\rangle\frac{\big(|0\rangle - |1\rangle\big)}{\sqrt{2}} = |x\rangle\frac{\big(|f(x)\rangle - |1+f(x)\rangle\big)}{\sqrt{2}}
-\]
+$$ U_f \left(\frac{|0\rangle+|1\rangle}{\sqrt{2}} \right)|0\rangle = \frac{1}{\sqrt{2}}(|0\rangle|f(0)\rangle+|1\rangle|f(1)\rangle) $$
 
-- For \( f(x)=0 \rightarrow U_f|x\rangle|-\rangle = |x\rangle\frac{\big(|0\rangle - |1\rangle\big)}{\sqrt{2}}=|x\rangle|-\rangle \)
-- For \( f(x)=1 \rightarrow U_f|x\rangle|-\rangle = |x\rangle\frac{\big(|1\rangle - |0\rangle\big)}{\sqrt{2}}=- |x\rangle|-\rangle \)
+$$ U_f|x\rangle|-\rangle = U_f |x\rangle\frac{\big(|0\rangle - |1\rangle\big)}{\sqrt{2}} = |x\rangle\frac{\big(|f(x)\rangle - |1+f(x)\rangle\big)}{\sqrt{2}}
+$$
+
+- For $f(x)=0 \rightarrow U_f|x\rangle|-\rangle = |x\rangle\frac{\big(|0\rangle - |1\rangle\big)}{\sqrt{2}}=|x\rangle|-\rangle$
+- For $ f(x)=1 \rightarrow U_f|x\rangle|-\rangle = |x\rangle\frac{\big(|1\rangle - |0\rangle\big)}{\sqrt{2}}=- |x\rangle|-\rangle $
 
 These equations can be summarized as follows:
-\[
-U_f|x\rangle|-\rangle = (-1)^{f(x)}|x\rangle|-\rangle
-\]
+$$ U_f|x\rangle|-\rangle = (-1)^{f(x)}|x\rangle|-\rangle $$
 
 ### Conclusion
 
 The general form can be represented as:
-\[
-U_f: \big(a|0\rangle + b |1\rangle\big)|-\rangle  \longrightarrow \big(a|0\rangle - b |1\rangle\big)|-\rangle
-\]
-
+$$ U_f: \big(a|0\rangle + b |1\rangle\big)|-\rangle  \longrightarrow \big(a|0\rangle - b |1\rangle\big)|-\rangle $$
 
 Before starting to express our quantum algorithms, it is better to introduce the "_phase kickedback_" trick which is a well-known effect in many quantum algorithms. To make this effect clear, let me suppose the following unitary operator $U_{f}$.
 
