@@ -1,8 +1,8 @@
 # Quantum Simple Algorithm-Qiskit
 
-In this repository, I am going to explain **Deutsch**, **Deutsch-Jozsa** and **Bernstein–Vazirani** algorithms. The related Qiskit files to solve this problem will added with different approaches.
+In this repository, I am going to explain **Deutsch**, and **Deutsch-Jozsa**. The related Qiskit files to solve this problems can be found in the repo.
 
-Before starting to express our quantum algorithms, it is better to introduce the "phase kickedback" trick which is a well-known effect in many quantum algorithms. To make this effect clear, let me suppose the following unitary operator $U_{f}$.
+Before starting to express our quantum algorithms, it is better to introduce the "_phase kickedback_" trick which is a well-known effect in many quantum algorithms. To make this effect clear, let me suppose the following unitary operator $U_{f}$.
 
 $$U_f|x\rangle|y\rangle=|x\rangle|y \oplus	f(x)\rangle$$
 
