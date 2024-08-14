@@ -7,7 +7,7 @@ Before beginning with more complex and "useful" quantum algorithms, it is benefi
 
 ### Phase Kickback
 
-Before delving into quantum algorithms, it's essential to understand the "phase kickback" phenomenon, a crucial concept in many quantum algorithms. Consider the unitary operator \( U_{f} \) defined as follows:
+Before delving into quantum algorithms, it's essential to understand the "phase kickback" phenomenon, a crucial concept in many quantum algorithms. Consider the unitary operator $U_{f}$ defined as follows:
 
 $$ U_f|x\rangle|y\rangle = |x\rangle|y \oplus f(x)\rangle $$
 
