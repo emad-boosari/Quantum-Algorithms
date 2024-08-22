@@ -1,30 +1,44 @@
-# oracle/deutsch.py
-
 from qiskit import QuantumCircuit
 import numpy as np
 
 class DeutschOracle:
     """Class to provide different types of oracles for the Deutsch algorithm."""
 
-    def __init__(self, num_qubits: int):
+    def __init__(self, oracle_type='random', output_value=0):
         """
-        Initialize the DeutschOracle with the number of input qubits.
+        Initialize the DeutschOracle with the oracle type.
 
-        :param num_qubits: The number of input qubits (not including the output qubit).
+        :param oracle_type: The type of oracle to generate ('balanced', 'constant', 'random').
+        :param output_value: 0 or 1, the value the constant oracle should return (only used for 'constant' type).
         """
-        self.num_qubits = num_qubits
+        self.oracle_type = oracle_type.lower()
+        self.output_value = output_value
 
-    def constant_oracle(self, output_value=0) -> QuantumCircuit:
+    def create_oracle(self) -> QuantumCircuit:
+        """
+        Create the oracle based on the specified type.
+
+        :return: A Gate representing the oracle.
+        """
+        if self.oracle_type == 'constant':
+            return self.constant_oracle()
+        elif self.oracle_type == 'balanced':
+            return self.balanced_oracle()
+        elif self.oracle_type == 'random':
+            return self.random_oracle()
+        else:
+            raise ValueError(f"Unknown oracle type: {self.oracle_type}. Choose from 'constant', 'balanced', 'random'.")
+
+    def constant_oracle(self) -> QuantumCircuit:
         """
         Create a constant oracle that returns the same output for any input.
 
-        :param output_value: 0 or 1, the value the oracle should return for any input.
         :return: A Gate representing the constant oracle.
         """
-        oracle = QuantumCircuit(self.num_qubits + 1)
+        oracle = QuantumCircuit(2)
 
-        if output_value == 1:
-            oracle.x(self.num_qubits)  # Flip the output qubit to |1> if the constant output is 1.
+        if self.output_value == 1:
+            oracle.x(1)  # Flip the output qubit to |1> if the constant output is 1.
 
         return oracle.to_gate(label="ConstantOracle")
 
@@ -34,13 +48,18 @@ class DeutschOracle:
 
         :return: A Gate representing the balanced oracle.
         """
-        oracle = QuantumCircuit(self.num_qubits + 1)
+        oracle = QuantumCircuit(2)
 
-        # Apply CNOT gates to entangle each input qubit with the output qubit.
-        for qubit in range(self.num_qubits):
-            oracle.cx(qubit, self.num_qubits)
+        if self.output_value == 1:
+            # f(0) = 1, f(1) = 0: Implement this as an "open control" CNOT
+            oracle.x(0)      # Invert the control qubit
+            oracle.cx(0, 1)  # Apply CNOT
+            oracle.x(0)      # Revert the control qubit
+        else:
+            # f(0) = 0, f(1) = 1: Standard CNOT
+            oracle.cx(0, 1)
 
-        return oracle.to_gate(label="BalancedOracle")
+    return oracle.to_gate(label="BalancedOracle")
 
     def random_oracle(self) -> QuantumCircuit:
         """
@@ -49,12 +68,12 @@ class DeutschOracle:
         :return: A Gate representing the random oracle.
         """
         if np.random.rand() > 0.5:
-            oracle_gate = self.constant_oracle(output_value=np.random.randint(2))
+            oracle_gate = self.constant_oracle()
         else:
             oracle_gate = self.balanced_oracle()
 
         # Create a wrapper circuit with the "Random Oracle" label
-        random_oracle_circuit = QuantumCircuit(self.num_qubits + 1)
-        random_oracle_circuit.append(oracle_gate, range(self.num_qubits + 1))
+        random_oracle_circuit = QuantumCircuit(2)
+        random_oracle_circuit.append(oracle_gate, range(2))
 
         return random_oracle_circuit.to_gate(label="Random Oracle")
