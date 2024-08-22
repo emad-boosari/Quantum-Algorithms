@@ -20,12 +20,14 @@ class DeutschOracle:
 
         :return: A Gate representing the oracle.
         """
-        if self.oracle_type == 'constant':
-            return self.constant_oracle()
-        elif self.oracle_type == 'balanced':
-            return self.balanced_oracle()
-        elif self.oracle_type == 'random':
-            return self.random_oracle()
+        oracle_methods = {
+            'constant': self.constant_oracle,
+            'balanced': self.balanced_oracle,
+            'random': self.random_oracle
+        }
+
+        if self.oracle_type in oracle_methods:
+            return oracle_methods[self.oracle_type]()
         else:
             raise ValueError(f"Unknown oracle type: {self.oracle_type}. Choose from 'constant', 'balanced', 'random'.")
 
@@ -50,24 +52,30 @@ class DeutschOracle:
         """
         oracle = QuantumCircuit(2)
 
-        if self.output_value == 1:
-            # f(0) = 1, f(1) = 0: Implement this as an "open control" CNOT
-            oracle.x(0)      # Invert the control qubit
-            oracle.cx(0, 1)  # Apply CNOT
-            oracle.x(0)      # Revert the control qubit
-        else:
-            # f(0) = 0, f(1) = 1: Standard CNOT
+        if self.output_value == 0:
             oracle.cx(0, 1)
+        else:
+            oracle.x(0)
+            oracle.cx(0, 1)
+            oracle.x(0)
 
-    return oracle.to_gate(label="BalancedOracle")
+        return oracle.to_gate(label="BalancedOracle")
 
     def random_oracle(self) -> QuantumCircuit:
         """
-        Create a random oracle that is either constant or balanced, but the type is not revealed.
+        Create a random oracle that can be one of the four types:
+        - Constant 0
+        - Constant 1
+        - Balanced 0
+        - Balanced 1
 
         :return: A Gate representing the random oracle.
         """
-        if np.random.rand() > 0.5:
+        is_constant = np.random.rand() > 0.5
+        random_output_value = np.random.randint(2)
+        self.output_value = random_output_value
+
+        if is_constant:
             oracle_gate = self.constant_oracle()
         else:
             oracle_gate = self.balanced_oracle()
