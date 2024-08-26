@@ -21,9 +21,9 @@ class DeutschOracle:
         :return: A Gate representing the oracle.
         """
         oracle_methods = {
-            'constant': self.constant_oracle,
-            'balanced': self.balanced_oracle,
-            'random': self.random_oracle
+            'constant': self.constant,
+            'balanced': self.balanced,
+            'random': self.random
         }
 
         if self.oracle_type in oracle_methods:
@@ -31,7 +31,7 @@ class DeutschOracle:
         else:
             raise ValueError(f"Unknown oracle type: {self.oracle_type}. Choose from 'constant', 'balanced', 'random'.")
 
-    def constant_oracle(self) -> QuantumCircuit:
+    def constant(self) -> QuantumCircuit:
         """
         Create a constant oracle that returns the same output for any input.
 
@@ -44,7 +44,7 @@ class DeutschOracle:
 
         return oracle.to_gate(label="ConstantOracle")
 
-    def balanced_oracle(self) -> QuantumCircuit:
+    def balanced(self) -> QuantumCircuit:
         """
         Create a balanced oracle that returns 0 for half the inputs and 1 for the other half.
 
@@ -61,7 +61,7 @@ class DeutschOracle:
 
         return oracle.to_gate(label="BalancedOracle")
 
-    def random_oracle(self) -> QuantumCircuit:
+    def random(self) -> QuantumCircuit:
         """
         Create a random oracle that can be one of the four types:
         - Constant 0
@@ -76,9 +76,9 @@ class DeutschOracle:
         self.output_value = random_output_value
 
         if is_constant:
-            oracle_gate = self.constant_oracle()
+            oracle_gate = self.constant()
         else:
-            oracle_gate = self.balanced_oracle()
+            oracle_gate = self.balanced()
 
         # Create a wrapper circuit with the "Random Oracle" label
         random_oracle_circuit = QuantumCircuit(2)
