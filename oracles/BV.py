@@ -5,7 +5,7 @@ from qiskit import QuantumCircuit, QuantumRegister
 from qiskit import QuantumCircuit, QuantumRegister
 import random
 
-class BV:
+class BVOracle:
     """Class to implement the Bernstein-Vazirani algorithm."""
 
     def __init__(self, num_qubits, hidden_string='random'):
@@ -53,31 +53,4 @@ class BV:
         oracle_gate = circuit.to_gate()
         oracle_gate.name = f'Oracle {self.hidden_string}'
         return oracle_gate
-
-
-
-from google.colab import drive
-drive.mount('/content/drive')
-
-%cd /content/drive/MyDrive/2- Programming/Python/2- Qiskit/0000- Quantum_Computation_Algorithms/Quantum-Algorithms/oracles
-
-%ls
-
-!mv BV.ipynb BV.Py
-!ls
-
-!pip install jupyter
-
-!jupyter nbconvert --to script your_notebook.ipynb
-
-
-
-
-
-
-
-
-
-
-
 
