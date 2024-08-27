@@ -1,52 +1,50 @@
-from qiskit import QuantumCircuit, QuantumRegister
 import random
+from qiskit import QuantumCircuit
 
-class BV:
-    """Class to implement the Bernstein-Vazirani algorithm."""
+class BVOracle:
+    """Class to create a Bernstein-Vazirani oracle."""
 
-    def __init__(self, num_qubits, hidden_string='random'):
+    def __init__(self, num_qubits: int, hidden_string: str = 'random'):
         """
-        Initialize the BV class.
+        Initialize the BVOracle.
 
         :param num_qubits: Number of input qubits.
         :param hidden_string: The hidden binary string or 'random' to generate a random string.
         """
         self.num_qubits = num_qubits
-        self.hidden_string = hidden_string if hidden_string != 'random' else self.random_binary_string(num_qubits)
-        self.q = QuantumRegister(self.num_qubits)
-        self.a = QuantumRegister(1)
+        self.is_random = hidden_string == 'random'  # Track if hidden string is generated randomly
+        self.hidden_string = self._initialize_hidden_string(hidden_string)
+
+    def _initialize_hidden_string(self, hidden_string):
+        """Generate a random binary string if needed."""
+        if self.is_random:
+            return ''.join(random.choices('01', k=self.num_qubits))
+        return hidden_string
 
     def create_oracle(self) -> QuantumCircuit:
-        """Create the oracle based on the specified hidden string."""
-        if self.hidden_string == 'random':
-            return self.random_oracle()
-        else:
-            return self.arbitrary_oracle()
+        """
+        Create the oracle based on the hidden string.
 
-    def random_binary_string(self, num_qubits):
-        """Generate a random binary string."""
-        return ''.join(random.choices(['0', '1'], k=num_qubits))
-
-    def random_oracle(self) -> QuantumCircuit:
-        """Create a random oracle based on a random hidden string."""
-        string = self.random_binary_string(self.num_qubits)
-        circuit = QuantumCircuit(self.q, self.a)
-        circuit.x(self.a)
-        for i in range(self.num_qubits):
-            if string[i] == '1':
-                circuit.cx(self.q[i], self.a)
-        oracle_gate = circuit.to_gate()
-        oracle_gate.name = 'Random Oracle'
-        return oracle_gate
-
-    def arbitrary_oracle(self) -> QuantumCircuit:
-        """Create an oracle for a specific hidden string."""
-        circuit = QuantumCircuit(self.q, self.a)
-        circuit.x(self.a)
+        :return: A QuantumCircuit representing the oracle.
+        """
+        oracle = QuantumCircuit(self.num_qubits + 1)
         for i in range(self.num_qubits):
             if self.hidden_string[i] == '1':
-                circuit.cx(self.q[i], self.a)
-        oracle_gate = circuit.to_gate()
-        oracle_gate.name = f'Oracle {self.hidden_string}'
+                oracle.cx(i, self.num_qubits)
+        oracle_gate = oracle.to_gate()
+
+        # Set the name based on whether the hidden string was generated randomly
+        if self.is_random:
+            oracle_gate.name = "Random Oracle"
+        else:
+            oracle_gate.name = f"Oracle {self.hidden_string}"
+
         return oracle_gate
 
+    def get_hidden_string(self) -> str:
+        """
+        Get the hidden binary string used by the oracle.
+
+        :return: The hidden binary string.
+        """
+        return self.hidden_string
