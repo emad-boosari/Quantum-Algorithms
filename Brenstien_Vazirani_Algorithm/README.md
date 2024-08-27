@@ -18,6 +18,7 @@ The quantum solution to the BV problem requires only a single query to retrieve 
 $$ \ket{\psi_3} = \frac{1}{2^n}\sum_{y=0}^{2^n-1}\sum_{x=0}^{2^n-1} (-1)^{x \cdot c} (-1)^{x \cdot y}\ket{y} \ket{-} $$
     
 $$ \ket{\psi_3} = \frac{1}{2^n}\sum_{x=0}^{2^n-1} \sum_{y=0}^{2^n-1} (-1)^{x \cdot (c \oplus y)} \ket{y} \ket{-} $$
+
 To analyze $\ket{\psi_3}$, we will use the equation that we have already presented in the Deutsch-Jozsa algorithm:
 
 $$ \frac{1}{2^n}\sum_{x=0}^{2^n-1} (-1)^{x \cdot y} = \delta_{0y} $$ 
