@@ -23,9 +23,11 @@ $$ \frac{1}{2^n}\sum_{x=0}^{2^n-1} (-1)^{x \cdot y} = \delta_{0y} $$
 
 Thus, we get:
 
-$$   \frac{1}{2^n}\sum_{x=0}^{2^n-1} (-1)^{x \cdot (c \oplus y)} = \delta_{0(c \oplus y)} $$
+$$\frac{1}{2^n}\sum_{x=0}^{2^n-1} (-1)^{x \cdot (c \oplus y)} = \delta_{0(c \oplus y)} $$
+
 This means that the sum is non-zero only when $y = c$, which makes $c \oplus y = 0 \cdots 0$. Therefore:
-$$    \ket{\psi_3} = \sum_{y=0}^{2^n-1} \delta_{0(c \oplus y)} \ket{y} \ket{-} $$
+
+$$\ket{\psi_3} = \sum_{y=0}^{2^n-1} \delta_{0(c \oplus y)} \ket{y} \ket{-} $$
 
 $$ \ket{\psi_3} =\bigg[\delta_{0(c \oplus 0)} \ket{0} + \delta_{0(c \oplus 1)} \ket{1} + \cdots + \delta_{0(c \oplus c)} \ket{c} + \cdots + \delta_{0(c \oplus (2^n-1))} \ket{2^n-1}\bigg] \ket{-} = \ket{c} \ket{-} $$
 
