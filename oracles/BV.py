@@ -1,11 +1,7 @@
-import numpy as np
-import random
-from qiskit import QuantumCircuit, QuantumRegister
-
 from qiskit import QuantumCircuit, QuantumRegister
 import random
 
-class BVOracle:
+class BV:
     """Class to implement the Bernstein-Vazirani algorithm."""
 
     def __init__(self, num_qubits, hidden_string='random'):
