@@ -2,7 +2,8 @@
 
 The Bernstein-Vazirani (BV) algorithm, designed by Ethan Bernstein and Umesh Vazirani in 1992, demonstrates the advantages of quantum algorithms over classical ones. This algorithm is a special case of the Deutsch-Jozsa algorithm, where the function $f(x)$ is defined as:
 
-$$ f(x) = x \cdot c = c_{n-1}x_{n-1} + c_{n-2}x_{n-2} + \cdots + c_1x_1 + c_0x_0 \pmod{2} $$
+$$f(x) = x \cdot c = c_{n-1}x_{n-1} + c_{n-2}x_{n-2} + \cdots + c_1x_1 + c_0x_0 \pmod{2} $$
+
 Here, $c = c_{n-1}c_{n-2}\cdots c_0$ is an $n$-bit binary number. The goal is to find $c$ using the fewest evaluations of $f(x)$.
 
 ## Classical Solution
