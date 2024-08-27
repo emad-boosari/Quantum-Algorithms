@@ -9,7 +9,7 @@ Here, $c = c_{n-1}c_{n-2}\cdots c_0$ is an $n$-bit binary number. The goal is to
 ## Classical Solution
 Classically, solving the BV problem requires $n$ queries, each providing one bit of information. By evaluating $f(x)$ for each power of 2, we can reveal the secret string $c$:
 
-$$f(0\cdots 00) &= c_0,\quad f(0\cdots 01) = c_1, \quad f(0\cdots 10) = c_2, \quad \cdots, \quad f(1\cdots 11) =  c_{n-1} $$
+$$f(0\cdots 00) = c_0,\quad f(0\cdots 01) = c_1, \quad f(0\cdots 10) = c_2, \quad \cdots, \quad f(1\cdots 11) =  c_{n-1} $$
 
 Each query provides one bit of the secret string, thus requiring $n$ queries to fully reconstruct it.
 ## Quantum Solution
