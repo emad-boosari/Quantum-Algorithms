@@ -30,6 +30,7 @@ $$U_f|x\rangle|-\rangle = (-1)^{f(x)}|x\rangle|-\rangle $$
 ### Conclusion
 
 The general form can be represented as:
+
 $$ U_f: \big(a|0\rangle + b |1\rangle\big)|-\rangle  \longrightarrow \big(a|0\rangle - b |1\rangle\big)|-\rangle $$
 
 
